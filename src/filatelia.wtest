@@ -1,0 +1,38 @@
+import filatelia.*
+
+describe " tests filatelicos" {
+
+const cachito = new Coleccionista()
+const cubana = new Estampilla(valor = 40, pais = "cuba", anio = 1994) 
+const pennyRed = new Estampilla(valor = 1, pais = "inglaterra", anio = 1841)
+const cck = new Hojita(contexto = 10,estampilla = new Estampilla(anio = 2015,valor = 20, pais = "argentina"))
+const unSobre = new Sobre(estampillasPegadas= [cck,cubana])
+
+
+test "coleccionista importante" {
+	cachito.conseguir(unSobre)
+	cachito.conseguir(cubana)
+	
+	assert.that(cachito.esImportante())
+}
+
+test "coleccionista no importante" {
+	cachito.conseguir(pennyRed)
+	assert.notThat(cachito.esImportante())
+
+}
+
+test "coleccionista tiene estampilla" {
+	cachito.conseguir(pennyRed)
+	assert.that(cachito.tenes(pennyRed))
+
+}
+
+test "coleccionista tiene estampilla pegada en sobre" {
+	cachito.conseguir(unSobre)
+	assert.that(cachito.tenes(cubana))
+
+}
+
+
+}
